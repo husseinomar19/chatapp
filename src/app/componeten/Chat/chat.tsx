@@ -2,7 +2,9 @@
 export default function chat(){
     return(
         <>
-        <h1 className="w-3/5 bg-slate-500 p-2">Chat</h1>
+        <div className="chat_content w-3/5 bg-white p-2">
+
+        </div>
         </>
     )
 }

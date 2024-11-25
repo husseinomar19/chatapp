@@ -13,7 +13,8 @@ export default {
         foreground: "var(--foreground)",
         menuground : "var(--menu)",
         pcolor: "#7C7C7C",
-        notiti: "#F24E1E"
+        notiti: "#F24E1E",
+        pmassage :"#E7E7E7"
       },
     },
   },

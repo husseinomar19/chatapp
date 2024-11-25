@@ -11,11 +11,25 @@ import loguit from "../image/loguit.png"
 import setting from "../image/setting.png"
 import nuti from "../image/notit.png"
 import massage from "../image/massage.png"
+import {auth} from "../../../firebaseconfig"
+import { signOut } from "firebase/auth";
+
 
 export default function Home() {
   const cookie = new Cookies();
   const router = useRouter();
   const [userImage, setUserImage] = useState(null); // Houd de client-side toestand bij
+  
+const handellogout = async()=>{
+  try{
+    await signOut(auth);
+    console.log("uit");
+    router.push("/");
+
+  }catch(err){
+    console.log(err);
+  }
+}
 
   useEffect(() => {
     // Zorg ervoor dat deze code alleen op de client draait
@@ -65,7 +79,7 @@ export default function Home() {
                 height={28}
                 alt="Icon" />
             </div>
-             <Image className="object-cover cursor-pointer"
+             <Image onClick={handellogout} className="object-cover cursor-pointer"
              src={loguit}
              height={28}
              width={28}

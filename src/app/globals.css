@@ -171,5 +171,32 @@ body {
 .single_user{
   border-bottom: solid 1px #d5d5d5;
 }
+.headerchat{
+  border-bottom: solid 1px #d5d5d5;
+}
+.send_form{
+  background-color: var(--background);
+  border-radius: 25px;
+}
+.sendchatinput input{
+  background-color: var(--background);
+  width: 100%;
+}
+.sendchatinput input::placeholder{
+  font-size: 14px;
+}
+.sendchatinput{
+  flex: 10;
+}
+.massage_content,.users{
+  -ms-overflow-style: none; /* Voor Internet Explorer en Edge */
+  scrollbar-width: none; /* Voor Firefox */
+}
+.massage_content::-webkit-scrollbar{
+   display: none;
+}
+.users::-webkit-scrollbar{
+  display: none;
+}
 
 

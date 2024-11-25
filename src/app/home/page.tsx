@@ -23,7 +23,10 @@ export default function Home() {
 const handellogout = async()=>{
   try{
     await signOut(auth);
-    console.log("uit");
+    cookie.remove('user_token')
+    cookie.remove('user_img')
+    cookie.remove('user_naam')
+    console.log("user is uit gelogd");
     router.push("/");
 
   }catch(err){
@@ -43,7 +46,11 @@ const handellogout = async()=>{
   }, [cookie, router]);
 
   if (!userImage) {
-    return <div>Loading...</div>; // Toon een fallback totdat de client-data beschikbaar is
+    return <div className="w-full h-full flex justify-center items-center">
+<svg className="svg_loaing" viewBox="25 25 50 50">
+  <circle r="20" cy="50" cx="50"></circle>
+</svg>
+    </div>; // Toon een fallback totdat de client-data beschikbaar is
   }
 
   return (

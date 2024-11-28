@@ -15,10 +15,12 @@ import {auth} from "../../../firebaseconfig"
 import { signOut } from "firebase/auth";
 
 
+
 export default function Home() {
   const cookie = new Cookies();
   const router = useRouter();
   const [userImage, setUserImage] = useState(null); // Houd de client-side toestand bij
+
   
 const handellogout = async()=>{
   try{
@@ -27,7 +29,11 @@ const handellogout = async()=>{
     cookie.remove('user_img')
     cookie.remove('user_naam')
     console.log("user is uit gelogd");
+
+
     router.push("/");
+
+
 
   }catch(err){
     console.log(err);

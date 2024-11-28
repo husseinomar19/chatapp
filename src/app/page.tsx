@@ -1,23 +1,44 @@
 "use client"
 import Cookies from 'universal-cookie';
 import { useRouter } from 'next/navigation';
-import {provider ,auth} from "../../firebaseconfig"
+import {provider ,auth,db} from "../../firebaseconfig"
 import { signInWithPopup } from 'firebase/auth';
 import { useState } from 'react';
-
+import { setDoc, doc } from "firebase/firestore";
 export default function LandingPage() {
 const [error , setError] = useState('');
 const router = useRouter();
 const cookie = new Cookies();
 
+  // Functie om gebruikersgegevens aan Firestore toe te voegen
+  const addUser = async (user: any) => {
+    try {
+      await setDoc(doc(db, "users", user.uid), {
+        naam: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+        uid: user.uid,
+        lastActive: new Date(),
+      });
+      console.log("User successfully added to Firestore!");
+    } catch (err) {
+      console.error("Error adding user to Firestore:", err);
+    }
+  };
+
 const googleHandel = async (event:any)=>{
   event.preventDefault();
   try{
   const result = await signInWithPopup(auth, provider)
+   // Gebruikersinformatie ophalen
+   const user = result.user;
+   
   cookie.set('user_token', result.user.refreshToken);
   cookie.set('user_naam', result.user.displayName);
   cookie.set('user_img', result.user.photoURL);
   console.log(result);
+  await addUser(user);
+  
   router.push('/home');
   }catch(error :any){
     setError(error.message);

@@ -121,6 +121,8 @@ export default function Chat({ chatId }: ChatProps) {
     }
   };
 
+  
+
   return (
     <div className="chat_content w-3/5 bg-white py-5 px-7 h-full">
       {/* Header with user information */}

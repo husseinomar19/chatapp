@@ -108,7 +108,7 @@ export default function Users({ setActiveChatId }: UsersProps) {
           {filteredUsers.map((user) => (
             <div
               key={user.id}
-              className="single_user flex justify-between items-center py-3"
+              className="single_user flex justify-between items-center py-3 cursor-pointer"
               onClick={() => createOrGetChat(user.uid)}
             >
               <div className="user_image flex justify-center items-center gap-2">

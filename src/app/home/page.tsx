@@ -109,7 +109,41 @@ export default function Home() {
           <Users setActiveChatId={setActiveChatId} />
 
           {/* Passing activeChatId prop to Chat */}
-          {activeChatId && <Chat chatId={activeChatId} />}
+          {activeChatId ? (
+            <Chat chatId={activeChatId} />
+          ) : (
+            <div className="chat_content w-3/5 bg-white py-5 px-7 h-full flex justify-center items-center">
+              <div className="loader">
+                <div className="box box0">
+                  <div></div>
+                </div>
+                <div className="box box1">
+                  <div></div>
+                </div>
+                <div className="box box2">
+                  <div></div>
+                </div>
+                <div className="box box3">
+                  <div></div>
+                </div>
+                <div className="box box4">
+                  <div></div>
+                </div>
+                <div className="box box5">
+                  <div></div>
+                </div>
+                <div className="box box6">
+                  <div></div>
+                </div>
+                <div className="box box7">
+                  <div></div>
+                </div>
+                <div className="ground">
+                  <div></div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </>

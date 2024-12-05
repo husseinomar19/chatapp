@@ -20,6 +20,7 @@ import emo from "../../image/imogi.png";
 import came from "../../image/came.png";
 import mic from "../../image/mic.png";
 import { User } from "firebase/auth";
+import { useRef } from "react";
 
 interface Message {
   id: string;
@@ -44,6 +45,7 @@ export default function Chat({ chatId }: ChatProps) {
   const [newMessage, setNewMessage] = useState("");
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [chatPartner, setChatPartner] = useState<ChatUser | null>(null);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   // Fetch current user
   useEffect(() => {
@@ -103,6 +105,12 @@ export default function Chat({ chatId }: ChatProps) {
     return () => unsubscribe();
   }, [chatId]);
 
+  // Scroll to the bottom of the chat when messages are loaded
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
+    }
+  }); // This will run every time messages change
   // Send message
   const sendMessage = async () => {
     if (!newMessage.trim()) return;
@@ -116,6 +124,11 @@ export default function Chat({ chatId }: ChatProps) {
         timestamp: Timestamp.now(),
       });
       setNewMessage("");
+      // Scroll to the bottom of the messages
+      if (messagesEndRef.current) {
+        messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
+      }
+
     } catch (error) {
       console.error("Error sending message:", error);
     }
@@ -170,7 +183,7 @@ export default function Chat({ chatId }: ChatProps) {
       </div>
 
       {/* Messages display */}
-      <div className="massage_content h-4/5 overflow-auto py-3 flex flex-col gap-2">
+      <div ref={messagesEndRef} className="massage_content h-4/5 overflow-auto py-3 flex flex-col gap-2 scroll-smooth">
         {messages.map((message) => (
           <div
             key={message.id}

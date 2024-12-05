@@ -13,12 +13,16 @@ import nuti from "../image/notit.png";
 import massage from "../image/massage.png";
 import { auth } from "../../../firebaseconfig";
 import { signOut } from "firebase/auth";
+import Nuti from "../componeten/Nuti/nuti";
+import Setting from "../componeten/Setting/setting";
+import Landingpage from "../componeten/Landingpage/Landingpage";
 
 export default function Home() {
   const cookie = new Cookies();
   const router = useRouter();
   const [userImage, setUserImage] = useState(null);
   const [activeChatId, setActiveChatId] = useState<string | null>(null);
+  const [activeSection, setActiveSection] = useState<string>("home");
 
   const handellogout = async () => {
     try {
@@ -53,6 +57,79 @@ export default function Home() {
     );
   }
 
+  //test siwcht
+
+  const rendersection = () => {
+    switch (activeSection) {
+      case "massage":
+        return (
+          <>
+            <Users setActiveChatId={setActiveChatId} />
+
+            {activeChatId ? (
+              <Chat chatId={activeChatId} />
+            ) : (
+              <div className="chat_content w-3/5 bg-white py-5 px-7 h-full flex justify-center items-center">
+                <div className="loader">
+                  <div className="box box0">
+                    <div></div>
+                  </div>
+                  <div className="box box1">
+                    <div></div>
+                  </div>
+                  <div className="box box2">
+                    <div></div>
+                  </div>
+                  <div className="box box3">
+                    <div></div>
+                  </div>
+                  <div className="box box4">
+                    <div></div>
+                  </div>
+                  <div className="box box5">
+                    <div></div>
+                  </div>
+                  <div className="box box6">
+                    <div></div>
+                  </div>
+                  <div className="box box7">
+                    <div></div>
+                  </div>
+                  <div className="ground">
+                    <div></div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </>
+        );
+      case "home":
+        return (
+          <>
+            <Landingpage />
+          </>
+        );
+      case "nuti":
+        return (
+          <>
+            <Nuti />
+          </>
+        );
+      case "setting":
+        return (
+          <>
+            <Setting />
+          </>
+        );
+      default:
+        return (
+          <>
+            <Landingpage />
+          </>
+        );
+    }
+  };
+
   return (
     <>
       <div className="content flex justify-center items-center h-lvh w-full bg-background py-7 px-20">
@@ -72,6 +149,7 @@ export default function Home() {
                 width={28}
                 height={28}
                 alt="Icon"
+                onClick={() => setActiveSection("home")}
               />
               <Image
                 className="object-cover cursor-pointer"
@@ -79,6 +157,7 @@ export default function Home() {
                 width={28}
                 height={28}
                 alt="Icon"
+                onClick={() => setActiveSection("massage")}
               />
               <Image
                 className="object-cover cursor-pointer"
@@ -86,6 +165,7 @@ export default function Home() {
                 width={28}
                 height={28}
                 alt="Icon"
+                onClick={() => setActiveSection("nuti")}
               />
               <Image
                 className="object-cover cursor-pointer"
@@ -93,6 +173,7 @@ export default function Home() {
                 width={28}
                 height={28}
                 alt="Icon"
+                onClick={() => setActiveSection("setting")}
               />
             </div>
             <Image
@@ -104,46 +185,7 @@ export default function Home() {
               alt="LogUit"
             />
           </div>
-
-          {/* Passing the setActiveChatId prop to Users */}
-          <Users setActiveChatId={setActiveChatId} />
-
-          {/* Passing activeChatId prop to Chat */}
-          {activeChatId ? (
-            <Chat chatId={activeChatId} />
-          ) : (
-            <div className="chat_content w-3/5 bg-white py-5 px-7 h-full flex justify-center items-center">
-              <div className="loader">
-                <div className="box box0">
-                  <div></div>
-                </div>
-                <div className="box box1">
-                  <div></div>
-                </div>
-                <div className="box box2">
-                  <div></div>
-                </div>
-                <div className="box box3">
-                  <div></div>
-                </div>
-                <div className="box box4">
-                  <div></div>
-                </div>
-                <div className="box box5">
-                  <div></div>
-                </div>
-                <div className="box box6">
-                  <div></div>
-                </div>
-                <div className="box box7">
-                  <div></div>
-                </div>
-                <div className="ground">
-                  <div></div>
-                </div>
-              </div>
-            </div>
-          )}
+          {rendersection()}
         </div>
       </div>
     </>

@@ -2,7 +2,7 @@
 import Cookies from 'universal-cookie';
 import { useRouter } from 'next/navigation';
 import {provider ,auth,db} from "../../firebaseconfig"
-import { signInWithPopup } from 'firebase/auth';
+import { signInWithPopup, User } from 'firebase/auth';
 import { useState } from 'react';
 import { setDoc, doc } from "firebase/firestore";
 export default function LandingPage() {
@@ -11,7 +11,7 @@ const router = useRouter();
 const cookie = new Cookies();
 
   // Functie om gebruikersgegevens aan Firestore toe te voegen
-  const addUser = async (user: any) => {
+  const addUser = async (user: User): Promise<void> => {
     try {
       await setDoc(doc(db, "users", user.uid), {
         naam: user.displayName,
@@ -26,7 +26,7 @@ const cookie = new Cookies();
     }
   };
 
-const googleHandel = async (event:any)=>{
+const googleHandel = async (event:React.MouseEvent<HTMLButtonElement>)=>{
   event.preventDefault();
   try{
   const result = await signInWithPopup(auth, provider)
@@ -40,8 +40,10 @@ const googleHandel = async (event:any)=>{
   await addUser(user);
   
   router.push('/home');
-  }catch(error :any){
+  }catch(error){
+    if(error instanceof Error){
     setError(error.message);
+  }
   }
 
 }

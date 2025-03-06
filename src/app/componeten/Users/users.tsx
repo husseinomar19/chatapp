@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import search from "../../image/zoeken.png";
 import avater from "../../image/useravatar.png";
-import { collection, getDocs, doc, setDoc, getDoc } from "firebase/firestore";
+import { collection, getDocs, doc, setDoc, getDoc ,Timestamp  } from "firebase/firestore";
 import { auth, db } from "../../../../firebaseconfig";
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -12,7 +12,7 @@ interface User {
   naam: string;
   email: string;
   photoURL?: string;
-  lastActive?: any;
+  lastActive?: Timestamp;
 }
 
 interface UsersProps {

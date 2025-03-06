@@ -4,16 +4,6 @@ import "./globals.css";
 import Head from 'next/head';
 import { Roboto } from 'next/font/google'
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
 const roboto = Roboto({
   weight: '500',
   subsets: ['latin'],

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import search from "../../image/zoeken.png";
 import avater from "../../image/useravatar.png";
-import { collection, getDocs, doc, setDoc, query, where, getDoc } from "firebase/firestore";
+import { collection, getDocs, doc, setDoc, getDoc } from "firebase/firestore";
 import { auth, db } from "../../../../firebaseconfig";
 import { onAuthStateChanged } from "firebase/auth";
 
